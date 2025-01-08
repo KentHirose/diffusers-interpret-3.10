@@ -162,20 +162,22 @@ class PipelineImg2ImgExplainerForBoundingBoxOutputOutput(PipelineExplainerForBou
 
 class ExplicitEnum(str, Enum):
     """
-    Enum with more explicit error message for missing values.
+    値が見つからない場合に、より明示的なエラーメッセージを提供するEnum。
     """
 
     @classmethod
     def _missing_(cls, value):
+        # Enumに値が存在しない場合、詳細なメッセージでValueErrorを発生させる
         raise ValueError(
-            f"{value} is not a valid {cls.__name__}, please select one of {list(cls._value2member_map_.keys())}"
+            f"{value}は有効な{cls.__name__}ではありません。有効な値の中から選択してください: {list(cls._value2member_map_.keys())}"
         )
 
 
 class AttributionAlgorithm(ExplicitEnum):
     """
-    Possible values for `tokens_attribution_method` and `pixels_attribution_method` arguments in `AttributionMethods`
+    `AttributionMethods`の`tokens_attribution_method`と`pixels_attribution_method`引数に使用される可能な値。
     """
+    # 属性付与アルゴリズムを表すEnumメンバーを定義
     GRAD_X_INPUT = "grad_x_input"
     MAX_GRAD = "max_grad"
     MEAN_GRAD = "mean_grad"

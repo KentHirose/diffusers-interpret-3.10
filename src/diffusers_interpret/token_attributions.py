@@ -1,7 +1,7 @@
 from typing import Tuple, List, Any, Union
 import matplotlib.pyplot as plt
 
-
+# このクラスでトークンの貢献度を扱っている？
 class TokenAttributions(list):
     def __init__(self, token_attributions: List[Tuple[str, float]]) -> None:
         super().__init__(token_attributions)
@@ -33,6 +33,7 @@ class TokenAttributions(list):
         # get arguments from plot_kwargs
         xlabel = plot_kwargs.get('xlabel')
         ylabel = plot_kwargs.get('ylabel')
+        # プロンプトをタイトルにする
         title = plot_kwargs.get('title') or f'{prefix.title()}Token Attributions'
 
         if plot_type == 'bar':
@@ -40,13 +41,27 @@ class TokenAttributions(list):
             plt.bar(tokens, attributions)
             plt.xlabel(xlabel or 'tokens')
             plt.ylabel(ylabel or f'{prefix}attribution value')
+            
 
         elif plot_type == 'barh':
             # Horizontal bar chart
-            plt.barh(tokens, attributions)
+            bars = plt.barh(tokens, attributions)
             plt.xlabel(xlabel or f'{prefix}attribution value')
             plt.ylabel(ylabel or 'tokens')
             plt.gca().invert_yaxis() # to have the order of tokens from top to bottom
+            
+            # 数値ラベルを追加
+            for bar in bars:
+                width = bar.get_width()
+                # 小数点第2位まで表示
+                width = round(width, 2)
+                plt.text(
+                    width, 
+                    bar.get_y() + bar.get_height() / 2, 
+                    f'{width}', 
+                    ha='left', 
+                    va='center'
+                )
 
         elif plot_type == 'pie':
             # Pie chart
