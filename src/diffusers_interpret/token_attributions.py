@@ -45,23 +45,11 @@ class TokenAttributions(list):
 
         elif plot_type == 'barh':
             # Horizontal bar chart
-            bars = plt.barh(tokens, attributions)
+            plt.barh(tokens, attributions)
             plt.xlabel(xlabel or f'{prefix}attribution value')
             plt.ylabel(ylabel or 'tokens')
             plt.gca().invert_yaxis() # to have the order of tokens from top to bottom
             
-            # 数値ラベルを追加
-            for bar in bars:
-                width = bar.get_width()
-                # 小数点第2位まで表示
-                width = round(width, 2)
-                plt.text(
-                    width, 
-                    bar.get_y() + bar.get_height() / 2, 
-                    f'{width}', 
-                    ha='left', 
-                    va='center'
-                )
 
         elif plot_type == 'pie':
             # Pie chart
