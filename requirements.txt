@@ -1,4 +1,4 @@
-transformers==4.37.2
+transformers==4.21.1
 setuptools>=49.6.0
 torch~=1.13
 diffusers~=0.3.0
