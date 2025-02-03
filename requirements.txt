@@ -1,4 +1,4 @@
-tokenizers==0.6.0
+tokenizers==0.11.1
 transformers==4.21.1
 setuptools>=49.6.0
 torch~=1.13
