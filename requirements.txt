@@ -2,7 +2,7 @@ transformers==4.21.1
 setuptools>=49.6.0
 torch~=1.13
 diffusers~=0.3.0
-scipy==1.8.1
+scipy==1.9.3
 ftfy==6.1.1
 cmapy==0.6.6
 matplotlib==3.5.3
